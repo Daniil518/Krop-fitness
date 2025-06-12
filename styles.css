@@ -215,11 +215,12 @@ svg * {
 
 :root {
 	--color-dark: #000000;
+	--color-dark-alternate: #131619;
 	--color-light: #ffffff;
 	--color-dark-grey: #404040;
 	--color-light-grey: #c4c4c4;
-	border-radius: 30;
-	border: 1px solid var(--color-light);
+	--border-radius: 30px;
+	--border: 1px solid var(--color-light);
 	--font-family-base: 'Heebo', 'sans-serif';
 	--font-family-base: 'Yantramanav', 'sans-serif';
 	--input-height: 54px;
@@ -239,11 +240,21 @@ body {
 	background-color: var(--color-dark);
 }
 /*Создаю глобальные стили*/
+a,
+button,
+input,
+textarea,
+svg * {
+	transition-duration: var(--transition-duration);
+}
+/*Оптимизация плавности интерактивных элементов*/
 a {
 	color: var(--color-light);
 }
 /*Создаю цвет ссылкам*/
-
+a:hover {
+	color: var(--color-light-grey);
+}
 .container {
 	max-width: calc(var(--container-width)+ var(--container-padding-x) * 2);
 	margin-inline: auto;
@@ -259,23 +270,126 @@ h6 {
 	font-weight: 700;
 	text-transform: uppercase;
 }
+.button {
+	display: inline-flex;
+	align-items: center;
+	height: 38px;
+	padding-inline: 26px;
+	font-size: 12px;
+	font-weight: 700;
+	line-height: 2;
+	letter-spacing: 1.2px;
+	text-transform: uppercase;
+	white-space: nowrap;
+	background-color: var(--color-light);
+	border: none;
+	border-radius: var(--border-radius);
+}
+/*Задаем свойства для кнопок внутри шапки*/
+.header-logo {
+	flex-shrink: 0;
+}
+/*Правило для правильной пропорции*/
+
+.button:hover {
+	background-color: var(--color-dark-grey);
+}
 .header {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	column-gap: 20px;
+	padding-inline: 32px;
 }
 /*Создаю правила для шапки страницы*/
 .header-menu-list {
 	display: flex;
+	flex-wrap: wrap;
 	column-gap: 50px;
 }
 /*Задаю интервал списка*/
 .header-menu-link {
+	display: inline-flex;
+	align-items: center;
+	column-gap: 7px;
+	height: 90px;
 	text-decoration: none;
 	text-transform: uppercase;
 	font-weight: 700;
 	font-size: 12px;
+	letter-spacing: 1.2px;
 }
-/*Убираю текстовое подчеркивание у ссылок, ставлю буквы в верхний регистр
-и ставлю размер буквам*/
+/*Убираю текстовое подчеркивание у ссылок, ставлю буквы в верхний регистр буквам
+вместо внутренних отступов для ссылок на блоки ставлю высоту, 
+превращаю строчный элемент в блочный и выравниваю по центру содержимое*/
+.header-menu-link.is-current::after {
+	content: '';
+	width: 5px;
+	height: 5px;
+	background-color: currentColor;
+	border-radius: 50%;
+}
+.header-actions {
+	display: flex;
+	column-gap: 40px;
+}
+.header-burger-button {
+	display: inline-flex;
+	flex-direction: column;
+	justify-content: center;
+	row-gap: 4px;
+	width: 40px;
+	height: 40px;
+	padding-left: 8px;
+	color: var(--color-light);
+	background-color: transparent;
+	border: var(--border);
+	border-radius: var(--border-radius);
+}
+/*Правила для бургер кнопки*/
+.header-burger-button:hover {
+	color: var(--color-light-grey);
+	border-color: currentColor;
+}
+
+.header-burger-button-line {
+	width: 6px;
+	height: 1px;
+	background-color: currentColor;
+	box-shadow: 15px 0 0 currentColor;
+}
+/*Правила для внутренности кнопки бургер*/
+@media (max-width: 1024px) {
+	.header {
+		flex-wrap: wrap;
+		row-gap: 10px;
+		padding-top: 20px;
+		padding-inline: 15px;
+	}
+	.header-menu {
+		order: 1;
+		flex-basis: 100%;
+	}
+	.header-menu-link {
+		height: 50px;
+	}
+}
+/*Настраиваю первый адаптив сайта*/
+@media (max-width: 767px) {
+	.button {
+		padding-inline: 18px;
+	}
+	.header {
+		padding-top: 10px;
+	}
+	.header-menu-list {
+		column-gap: 24px;
+	}
+	.header-menu-link {
+		height: 32px;
+	}
+	.header-actions {
+		column-gap: 15px;
+	}
+}
+/*Настраиваю второй адаптив сайта*/
