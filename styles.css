@@ -431,7 +431,8 @@ h6 {
 }
 /*свойства импут для полей формы*/
 
-.input::placeholder{
+.input::placeholder,
+select.input:invalid{
 	color: var(--color-light-grey);
 }
 /*Значение текста внутри полей формы*/
@@ -447,6 +448,14 @@ h6 {
 	outline: none;
 }
 /*свойство для активного действия над полями*/
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+/*Свойство для скрытие селоктора выборки у окон где оно не нужно*/
 
 .header {
 	display: flex;
@@ -864,6 +873,148 @@ h6 {
 }
 /*Свойство для дочерних элементов*/
 
+.calculate{
+	padding-block: 146px;
+	background-color: var(--color-dark-alternate);
+}
+/*Общие свойства блока calculate*/
+
+.calculate-inner{
+	display: flex;
+	align-items: center;
+	column-gap: 36px;
+}
+/*Свойство для двух элементов блока calculate*/
+
+.calculate-body{
+	flex-grow: 1;
+	max-width: 627px;
+}
+/*Свойство для левого блока*/
+
+.calculate-title:not(:last-child){
+	margin-bottom: 16px;
+}
+/*Свойство для заголовка*/
+
+.calculate-description{
+	max-width: 385px;
+}
+/*Общее свойство для абзаца*/
+
+.calculate-description:not(:last-child){
+	margin-bottom: 30px;
+}
+/*Свойство для абзаца*/
+
+.calculate-form-body{
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 18px 30px;
+}
+/*Общее свойство для формы*/
+
+.calculate-form-body:not(:last-child){
+	margin-bottom: 26px;
+}
+/*Свойство для формы*/
+
+.calculate-input.wide {
+	grid-column: -1 / 1;
+}
+/*Свойство для кнопки формы*/
+
+.calculate-table-wrapper{
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	max-width: 610px;
+}
+/*общее свойство для правой стороны формы calculate*/
+
+.calculate-table-wrapper::before{
+	content: '';
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	translate: -50% -50%;
+	width: 100%;
+	aspect-ratio: 1;
+	background-color: var(--color-dark);
+	border-radius: 50%;
+}
+/*Свойство для фона ввиде круга*/
+
+.calculate-table{
+	position: relative;
+	border-collapse: collapse;
+}
+/*Свойство для таблицы*/
+
+.calculate-table :is(td, th){
+	padding-right: 30px;
+}
+/*Свойство для всех ячеек таблицы таблицы*/
+
+.calculate-table :is(td, th):not(:first-child) {
+	padding-left: 30px;
+}
+/*Свойство для всех ячеек таблицы заголовков и обычных ячеек для центрирования второго столбца
+(для всех элементов кто не явлется первым)
+*/
+
+.calculate-table :is(td, th):not(:last-child){
+	border-right: 1px solid var(--color-light-grey);
+}
+/*Свойство для всех ячеек кроме последней*/
+
+.calculate-table tbody td{
+	border-top: 1px solid var(--color-light-grey);
+}
+/*Свойство для всех ячеек кроме хедера и футера таблицы*/
+
+.calculate-table tbody tr:last-child td:first-child{
+	position: relative;
+}
+/*Свойство для позиционирования рамки у последней ячеки таблицы*/
+
+.calculate-table tbody tr:last-child td:first-child::after {
+	content: '';
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	width: 70%;
+	height: 1px;
+	background-color: var(--color-light-grey);
+}
+/*Свойство для последней ячеки таблицы без учета футера для добавления короткой границы*/
+
+.calculate-table th{
+	padding-block: 20px;
+	text-align: left;
+	text-transform: uppercase;
+	color: var(--color-light);
+}
+/*Свойство для заголовков ячейкам таблицы*/
+
+.calculate-table td{
+	padding-block: 14px;
+}
+/*Свойство для ячеек таблицы*/
+
+.calculate-table tfoot{
+	color: var(--color-light);
+}
+/*Общее свойство для футера таблицы*/
+
+.calculate-table tfoot td {
+	padding-top: 33px;
+	padding-bottom: 0;
+}
+/*Свойство для футтера таблицы*/
+
 @media (max-width: 1919px) {
 	.motivation-card-image {
 		margin-block: -20px;
@@ -919,6 +1070,24 @@ h6 {
 	.family-image{
 		height: 360px;
 	}
+	.calculate{
+		padding-block: 100px;
+	}
+	.calculate-inner{
+		column-gap: 20px;
+	}
+	.calculate-form-body{
+		grid-template-columns: 1fr;
+	}
+	.calculate-button{
+		width: 100%;
+	}
+	.calculate-table :is(td, th){
+		padding-block: 10px;
+	}
+	.calculate-table tfoot td{
+		padding-top: 10px;
+	}
 }
 /*Настраиваю адаптив под макисмальную ширину 1024px*/
 
@@ -926,78 +1095,110 @@ h6 {
 	.button {
 		padding-inline: 18px;
 	}
+
 	.header {
 		padding-top: 10px;
 	}
+
 	.header-menu-list {
 		column-gap: 24px;
 	}
+
 	.header-menu-link {
 		height: 32px;
 	}
+
 	.header-actions {
 		column-gap: 15px;
 	}
-	.banner-info{
+
+	.banner-info {
 		margin-bottom: 5px;
 	}
-	.banner-info::before{
+
+	.banner-info::before {
 		margin-right: 10px;
 	}
+
 	.motivation-card,
 	.motivation-item:nth-child(even) .motivation-card {
 		flex-direction: column-reverse;
 	}
-	.motivation-card{
+
+	.motivation-card {
 		row-gap: 30px;
 		padding-block: 30px;
 	}
-	.motivation-card-image{
+
+	.motivation-card-image {
 		max-width: 60%;
 	}
+
 	.motivation-card-description:not(:last-child) {
 		margin-bottom: 20px;
 	}
+
 	.training-types-list {
 		grid-template-columns: repeat(2, 1fr);
 		gap: 30px;
 	}
+
 	.training-types-item {
 		--trainingTypesItemBgIconSize: 50px;
 		row-gap: 10px;
 	}
+
 	.training-types-image {
 		max-width: 120px;
 	}
-	.join-us-video-play-button{
+
+	.join-us-video-play-button {
 		width: 140px;
 	}
-	.join-us-title:not(:last-child){
+
+	.join-us-title:not(:last-child) {
 		margin-bottom: 40px;
 	}
-	.section-description{
+
+	.section-description {
 		font-size: 16px;
 	}
-	.join-us-form-body{
+
+	.join-us-form-body {
 		flex-direction: column;
 		align-items: center;
 		row-gap: 20px;
 	}
-	.location-body{
+
+	.location-body {
 		padding-bottom: 40px;
 	}
-	.location-description:not(:last-child){
+
+	.location-description:not(:last-child) {
 		padding-bottom: 20px;
 	}
-	.family-image{
+
+	.family-image {
 		height: 180px;
 	}
-	.family-header{
+
+	.family-header {
 		padding-top: 80px;
 		padding-bottom: 50px;
 	}
-	.family-body{
+
+	.family-body {
 		column-gap: 12px;
+	}
+	.calculate{
+		padding-block: 60px;
+	}
+	.calculate-inner{
+		flex-direction: column;
+		row-gap: 30px;
+	}
+	.calculate-table-wrapper::before{
+		display: none;
 	}
 }
 /*Настраиваю адаптив под макисмальную ширину 767px*/
